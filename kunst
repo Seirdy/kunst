@@ -4,7 +4,7 @@
 # ┴ ┴└─┘┘└┘└─┘ ┴
 # Created by Siddharth Dushantha
 #
-# Dependencies: sxiv or imv, imagemagick, bash, ffmpeg, mpc, jq, mpd
+# Dependencies: sxiv or imv, bash, ffmpeg, mpc, jq, mpd
 
 
 VERSION=1.2.4
@@ -139,7 +139,7 @@ get_cover_online() {
 update_cover() {
 	# Extract the album art from the mp3 file and dont show the messsy
 	# output of ffmpeg
-	ffmpeg -i "$MUSIC_DIR$(mpc current -f %file%)" $COVER -y &> /dev/null
+	ffmpeg -loglevel error -i "$MUSIC_DIR/$(mpc current -f %file%)" $COVER -y
 
 	# Get the status of the previous command
 	STATUS=$?
@@ -167,7 +167,7 @@ update_cover() {
             if [ -f "$CANDIDATE" ]; then
                 STATUS=0
                 export ARTLESS=false
-                convert "$CANDIDATE" $COVER
+                ffmpeg -loglevel error -i "$CANDIDATE" $COVER -y
 								ls -l $COVER
                 if [ ! $SILENT ];then
                     echo "kunst: found cover $CANDIDATE"
@@ -186,7 +186,7 @@ update_cover() {
 
 	# Resize the image to 250x250
 	if [ $ARTLESS == false ]; then
-		convert $COVER -resize $SIZE $COVER &> /dev/null
+		ffmpeg -loglevel error -i $COVER -vf scale=$WIDTH:-1 $COVER -y
         if [ ! $SILENT ];then
             echo "kunst: resized album art to $SIZE"
         fi
