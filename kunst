@@ -167,7 +167,7 @@ update_cover() {
             if [ -f "$CANDIDATE" ]; then
                 STATUS=0
                 export ARTLESS=false
-                ffmpeg -loglevel error -i "$CANDIDATE" $COVER -y
+                ffmpeg -loglevel error -i "$CANDIDATE" -vframes 1 $COVER -y
 								ls -l $COVER
                 if [ ! $SILENT ];then
                     echo "kunst: found cover $CANDIDATE"
@@ -186,7 +186,7 @@ update_cover() {
 
 	# Resize the image to 250x250
 	if [ $ARTLESS == false ]; then
-		ffmpeg -loglevel error -i $COVER -vf scale=$WIDTH:-1 $COVER -y
+		ffmpeg -loglevel error -i $COVER -vframes 1 -vf scale=$WIDTH:-1 $COVER -y
         if [ ! $SILENT ];then
             echo "kunst: resized album art to $SIZE"
         fi
