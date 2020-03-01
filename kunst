@@ -166,9 +166,8 @@ update_cover() {
           while read -r CANDIDATE; do
             if [ -f "$CANDIDATE" ]; then
                 STATUS=0
-                export ARTLESS=false
+                ARTLESS=false
                 ffmpeg -loglevel error -i "$CANDIDATE" -vframes 1 $COVER -y
-								ls -l $COVER
                 if [ ! $SILENT ];then
                     echo "kunst: found cover $CANDIDATE"
                 fi
