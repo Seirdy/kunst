@@ -77,6 +77,7 @@ done
 
 # If available, use imv instead of sxiv on Wayland,
 # unless specified otherwise by the user.
+# shellcheck disable=SC2154 # "SWAYSOCK is referenced but not assigned"
 if [ -n "$SWAYSOCK" ] || [ "$XDG_SESSION_TYPE" = 'wayland' ] \
 	&& [ -z "$VIEWER" ] && command -v imv >/dev/null; then
 	VIEWER=imv
