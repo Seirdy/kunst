@@ -14,7 +14,7 @@ SIZE="${WIDTH}x${WIDTH}"
 POSITION="+0+0"
 
 show_help() {
-	echo "usage: kunst [-h] [--size "px"] [--position "+x+y"] [--viewer <imv|x11>] [--music_dir "path/to/dir"] [--silent] [--version]"
+	echo "usage: kunst [-h] [--size px] [--position +x+y] [--viewer <imv|x11>] [--music_dir path/to/dir] [--silent] [--version]"
 	echo " "
 	echo "┬┌─┬ ┬┌┐┌┌─┐┌┬┐"
 	echo "├┴┐│ ││││└─┐ │"
