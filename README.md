@@ -8,6 +8,8 @@
 </a>
 </p>
 
+[![Support me!](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/XoJfSVI)
+
 ## Dependencies
 - ```sxiv``` or ```imv```
 - ```bash```
@@ -41,7 +43,7 @@ $ curl -L git.io/raw-kunst > kunst && chmod +x kunst && mv kunst ~/.local/bin
 
 ```bash
 $ kunst --help
-usage: kunst [-h] [--size px] [--music_dir path/to/dir] [--silent] [--version]
+usage: kunst [-h] [--size "px"] [--viewer imv|sxiv] [--position "+x+y"] [--music_dir "path/to/dir"] [--silent] [--version]
 
 ┬┌─┬ ┬┌┐┌┌─┐┌┬┐
 ├┴┐│ ││││└─┐ │
@@ -53,6 +55,7 @@ optional arguments:
    --size                what size to display the album art in
    --position            the position where the album art should be displayed
    --music_dir           the music directory which MPD plays from
+   --viewer              whether to use sxiv or imv as the image viewer
    --silent              dont show the output
    --version             show the version of kunst you are using
 ```
@@ -62,6 +65,9 @@ optional arguments:
 You can configure `kunst` through environment variables.
 
 ```bash
+# The image viewer to use
+export KUNST_VIEWER="imv"
+
 # The size of the album art to be displayed
 export KUNST_SIZE="250x250"
 
@@ -77,6 +83,7 @@ export KUNST_MUSIC_DIR="/home/username/Music/"
 <img src="https://user-images.githubusercontent.com/27065646/53107999-89ec9480-3536-11e9-98a2-9ff416bf4589.png">
 </a>
 </p>
+
 
 ## License
 MIT License
