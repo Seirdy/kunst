@@ -253,6 +253,11 @@ main() {
 			echo $! >/tmp/kunst.pid
 		fi
 
+		if [ "$VIEWER" = 'imv' ]; then
+			imv-msg "$(cat /tmp/kunst.pid)" close all
+			imv-msg "$(cat /tmp/kunst.pid)" open "$COVER"
+		fi
+
 		# Waiting for an event from mpd; play/pause/next/previous
 		# this is lets kunst use less CPU :)
 		while true; do
@@ -260,7 +265,6 @@ main() {
 		done
 
 		[ ! $SILENT ] && echo "kunst: received event from mpd"
-
 	done
 }
 
