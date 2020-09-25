@@ -133,7 +133,7 @@ get_cover_online() {
 update_cover() {
 	# Extract the album art from the mp3 file and dont show the messsy
 	# output of ffmpeg
-	ffmpeg -loglevel error -i "$MUSIC_DIR$(mpc current -f %file%)" "$COVER" -y
+	ffmpeg -loglevel error -i "$MUSIC_DIR/$(mpc current -f %file%)" "$COVER" -y
 
 	# Get the status of the previous command
 	STATUS=$?
@@ -143,7 +143,7 @@ update_cover() {
 		[ ! "$SILENT" ] && echo "kunst: extracted album art"
 		ARTLESS=false
 	else
-		DIR="$MUSIC_DIR$(dirname "$(mpc current -f %file%)")"
+		DIR="$MUSIC_DIR/$(dirname "$(mpc current -f %file%)")"
 		[ ! $SILENT ] && echo "kunst: inspecting $DIR"
 
 		# Check if there is an album cover/art in the folder.
@@ -169,8 +169,8 @@ update_cover() {
 		get_cover_online
 	fi
 
-	# Resize the image to 250x250
-	if [ $ARTLESS == false ]; then
+	# Resize the image to 250x250. Not needed on Sway since we resize the imv window instead
+	if [ $ARTLESS == false ] && [ -z "$SWAYSOCK" ]; then
 		ffmpeg -loglevel error -i $COVER -vframes 1 -vf scale=$WIDTH:-1 $COVER -y
 		[ ! $SILENT ] && echo "kunst: resized album art to $SIZE"
 	fi
